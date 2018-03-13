@@ -1,14 +1,14 @@
 //STEP 1. Import required packages
 import java.sql.*;
 
-public class JDBCSelectRecords{
+public class JDBCSelectWithWHERE{
 // JDBC driver name and database URL
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
    static final String DB_URL = "jdbc:mysql://localhost:3306/emp?useSSL=false";
 
    //  Database credentials
-   static final String USER = "syera";
-   static final String PASS = "abc123";
+   static final String USER = "myuser";
+   static final String PASS = "gopi";
       
    public static void main(String[] args) {
    Connection conn = null;
@@ -26,9 +26,31 @@ public class JDBCSelectRecords{
       System.out.println("Creating statement...");
       stmt = conn.createStatement();
 
+      // Extract records without any condition.
+      System.out.println("Fetching records without condition...");
       String sql = "SELECT id, first, last, age FROM Registration";
       ResultSet rs = stmt.executeQuery(sql);
-      //STEP 5: Extract data from result set
+
+      while(rs.next()){
+         //Retrieve by column name
+         int id  = rs.getInt("id");
+         int age = rs.getInt("age");
+         String first = rs.getString("first");
+         String last = rs.getString("last");
+
+         //Display values
+         System.out.print("ID: " + id);
+         System.out.print(", Age: " + age);
+         System.out.print(", First: " + first);
+         System.out.println(", Last: " + last);
+      }
+
+      // Select all records having ID equal or greater than 101
+      System.out.println("Fetching records with condition...");
+      sql = "SELECT id, first, last, age FROM Registration" +
+                   " WHERE id >= 101 ";
+      rs = stmt.executeQuery(sql);
+
       while(rs.next()){
          //Retrieve by column name
          int id  = rs.getInt("id");

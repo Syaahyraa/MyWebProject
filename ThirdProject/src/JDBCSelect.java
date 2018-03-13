@@ -7,8 +7,8 @@ public class JDBCSelect {
    static final String DB_URL = "jdbc:mysql://localhost:3306/emp?useSSL=false";
 
    //  Database credentials
-   static final String USER = "syera";
-   static final String PASS = "abc123";
+   static final String USER = "myuser";
+   static final String PASS = "gopi";
    
    public static void main(String[] args) {
    Connection conn = null;
